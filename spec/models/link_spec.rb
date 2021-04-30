@@ -40,7 +40,7 @@ it "is valid if it has an original URL and a lookup code" do
         original_url: "therhejrhe",
         lookup_code: "1234567"
     )
-    expect(link.valid?).to be(true)
+    expect(link.valid?).to be(false)
 end
 
 end
