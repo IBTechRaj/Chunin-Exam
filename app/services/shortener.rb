@@ -1,4 +1,4 @@
-require "digest/sha2"
+# require "digest/sha2"
 
 class Shortener
 
@@ -14,11 +14,20 @@ class Shortener
     end 
  
     def lookup_code
-    string = ""
-    7.times do |n|
-        string << (rand * n).round
+        loop do
+            code = get_fresh_code
+            break code unless link_model.exists?(lookup_code: code)
+            i=i+1
+        end
+
     end
-    string
+    
+    private
+    
+    def get_fresh_code
+        # Digest::SHA256.hexdigest(url)[i..(i+6)]
+        SecureRandom.uuid[0..6]
     end
+
 
 end
