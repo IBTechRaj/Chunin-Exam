@@ -35,11 +35,12 @@ it "is invalid if the lookup code already exists" do
     expect(link_2.valid?).to be(false)
 end
 
-# it "is valid if it has an original URL and a lookup code" do
-#     link=Link.new(
-#         original_url: "therhejrhe",
-#         lookup_code: "1234567"
-#     )
-#     expect(link.valid?).to be(false)
-# end
+it "is valid if it has an original URL and a lookup code" do
+    link=Link.new(
+        original_url: "therhejrhe",
+        lookup_code: "1234567"
+    )
+    expect(link.valid?).to be(true)
+end
+
 end
