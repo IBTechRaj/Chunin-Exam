@@ -20,4 +20,12 @@ it "gives each URL its own lookup code" do
     expect(code_2).not_to eq(code_1)
 end
 
+it "generates a Link record with a unique lookup code" do
+    url="https://link.springer.com/chapter/10.1057%2F9781403980212_4"
+    shortener = Shortener.new(url)
+    link= shortener.generate_short_link
+
+    expect(link.valid?).to be(true)
+end
+
 end

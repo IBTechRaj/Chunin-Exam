@@ -1,14 +1,17 @@
-# require "digest/sha2"
+require "digest/sha2"
 
 class Shortener
 
     attr_reader :url, :link_model
 
-    def initialize(url)
-    
-        end
+    def initialize(url, link_model = Link)
+        @url = url
+        @link_model=link_model
+    end
 
-   
+    def generate_short_link
+        link_model.create(original_url: url, lookup_code: lookup_code)
+    end 
  
     def lookup_code
     string = ""
