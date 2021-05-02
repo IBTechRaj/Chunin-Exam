@@ -1,27 +1,41 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
-<%= form_for @link, remote: true do  |form| %>
-    <%= form.text_field :original_url, class: "form-control",
-    placeholder: "Enter URL to shorten" %>
-    <%= form.submit "Shorten", class: 'btn btn-primary mt-2' %>
-    <% end %>
+<div class="container">
+  <div class="py-5">
+    <div class="card">
+      <div class="card-body">
+      <h4 class="card-title"> Enter URL to shorten </h4>
+      <%= form_for @link, remote: true do  |form| %>
+          <%= form.text_field :original_url, class: "form-control",
+          placeholder: "Enter URL to shorten" %>
+          <%= form.submit "Shorten", class: 'btn btn-primary mt-2' %>
+      <% end %>
+      </div>
+      <div class="card-body">
+        <div id="error-message">
+
+        </div>
+      </div>
+
+      <div class="card-body">
+      <h4 class="card-title"> The Shortened Url: </h4>
+        <div  data-controller="clipboard">
+          <input id="short-link" data-clipboard-target="source"  type="text"  readonly>
+        <button data-action="clipboard#copy" class="btn btn-success">Copy </button>
+        </div>
+      </div>
     </div>
+  </div>
     
+ 
 
+
+  <div class="py-2">
+    <div class="card">
+      <div class="card-body">
+      <h5 class="card-title"> Some Analytics </h5>
+        No.of shortened URLs queried    : <%= Link.count %><br>
+        No.of distinct URLs queried     : <%= Link.distinct.count(:original_url) %><br>
+        No.of duplicate shortened URLs  : <%= (Link.count == Link.distinct.count(:lookup_code)? 0 : Link.count - Link.Link.distinct.count(:lookup_code)) %>
+      </div>
     </div>
-
-    
- <div id="error-message">
-   
-</div>
-<br><br>
-<div  data-controller="clipboard">
-  The Shortened Url: <input id="short-link" data-clipboard-target="source"  type="text"  readonly>
-  <button data-action="clipboard#copy">Copy </button>
-</div>
-
-<div>
-No.of shortened URLs queried    : <%= Link.count %><br>
-No.of distinct URLs queried     : <%= Link.distinct.count(:original_url) %><br>
-No.of duplicate shortened URLs  : <%= (Link.count == Link.distinct.count(:lookup_code)? 0 : Link.count - Link.Link.distinct.count(:lookup_code)) %>
+  </div>
 </div>
