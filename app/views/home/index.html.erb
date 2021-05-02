@@ -19,3 +19,9 @@
   The Shortened Url: <input id="short-link" data-clipboard-target="source"  type="text"  readonly>
   <button data-action="clipboard#copy">Copy </button>
 </div>
+
+<div>
+No.of shortened URLs queried    : <%= Link.count %><br>
+No.of distinct URLs queried     : <%= Link.distinct.count(:original_url) %><br>
+No.of duplicate shortened URLs  : <%= (Link.count == Link.distinct.count(:lookup_code)? 0 : Link.count - Link.Link.distinct.count(:lookup_code)) %>
+</div>
